@@ -4,9 +4,8 @@
 struct Window window;
 
 void window_init(const char* winTitle, int x, int y,
-        winFunc_ptr loop_ptr, winFunc_ptr destroy_ptr, winFunc_ptr events_ptr)
+       winFunc_ptr destroy_ptr, winFunc_ptr events_ptr)
 {
-    window.loop = loop_ptr;
     window.destroy = destroy_ptr;
     window.events = events_ptr;
     window.size[0] = x;
@@ -30,28 +29,6 @@ void window_init(const char* winTitle, int x, int y,
 
 }
 
-void window_loop(void)
-{
-    window.deltaB = window.deltaA = (float)glfwGetTime();
-    while(!glfwWindowShouldClose(window.ptr))
-    {
-        window.events();
-        window.deltaB = (float)glfwGetTime();
-        window.deltaTime = window.deltaB - window.deltaA;
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        for(unsigned int i = 0; i < window.strips; i++)
-            glDrawElements(GL_TRIANGLE_STRIP, window.vertsPrStrip, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * window.vertsPrStrip * window.strips));
-
-        glfwSwapBuffers(window.ptr);
-        glfwPollEvents();
-
-        window.deltaA = window.deltaB;
-    }
-    window.destroy();
-}
-
 void window_events(void)
 {
     if(glfwGetKey(window.ptr, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -61,5 +38,4 @@ void window_events(void)
 void window_destroy(void)
 {
     glfwTerminate();
-    //free(window);
 }

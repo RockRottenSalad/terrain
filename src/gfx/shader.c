@@ -23,7 +23,7 @@ const char* fragmentSrc = "#version 330 core\n"
 "in float height;\n"
 "void main()\n"
 "{\n"
-"   float col = (height+16)/32.0;\n"
+"   float col = (height+16)/20.0;\n"
 "   FragColor = vec4(col, col, col, 1.0);\n"
 "}\0";
 

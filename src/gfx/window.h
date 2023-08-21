@@ -23,9 +23,8 @@ struct Window
 extern struct Window window;
 
 void window_init(const char* winTitle, int x, int y,
-        winFunc_ptr loop_ptr, winFunc_ptr destroy_ptr, winFunc_ptr events_ptr);
+        winFunc_ptr destroy_ptr, winFunc_ptr events_ptr);
 void window_destroy(void);
-void window_loop(void);
 void window_events(void);
 
 #endif

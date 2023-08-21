@@ -44,7 +44,7 @@ void terrain_generateVertices(void)
 
             unsigned char y = pixel[0];
             terrain.vertices[index] = (-terrain.heightmap.height / 2.0f + terrain.heightmap.height*i/(float)terrain.heightmap.height);
-            terrain.vertices[index+1] = (int)y * (32.0f / 256.0f) - 16.0f;
+            terrain.vertices[index+1] = (int)y * (25.0f / 256.0f) - 16.0f;
             terrain.vertices[index+2] = (-terrain.heightmap.width / 2.0f + terrain.heightmap.width*n/(float)terrain.heightmap.width);
             index += 3;
         }

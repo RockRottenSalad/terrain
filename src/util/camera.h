@@ -19,7 +19,7 @@ struct Camera
 
     float yaw, pitch;
 
-    float camSpeed, camSens, fov;
+    float camSpeed, camSens, fov, deltaTime;
     camFuncGetMat4_ptr getView;
     camFuncGetMat4_ptr getPerspective;
     camFunc_ptr updateCamera;

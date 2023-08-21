@@ -28,7 +28,7 @@ void camera_init(camFuncGetMat4_ptr getView_ptr, camFuncGetMat4_ptr getPers_ptr,
     camera.up[1] = 1.0f;
     camera.up[2] = 0.0f;
 
-    camera.camSpeed = 0.75f;
+    camera.camSpeed = 0.22f;
     camera.camSens = 0.1f;
     camera.fov = 110.0f;
 
@@ -82,14 +82,14 @@ void camera_updateDirection(double x, double y)
 void camera_moveForward(void)
 {
     glm_vec3_zero(camera.buffer);
-    glm_vec3_scale(camera.target, camera.camSpeed, camera.buffer);
+    glm_vec3_scale(camera.target, (camera.camSpeed * camera.deltaTime), camera.buffer);
     glm_vec3_add(camera.pos, camera.buffer, camera.pos);
 }
 
 void camera_moveBack(void)
 {
     glm_vec3_zero(camera.buffer);
-    glm_vec3_scale(camera.target, camera.camSpeed, camera.buffer);
+    glm_vec3_scale(camera.target, (camera.camSpeed * camera.deltaTime), camera.buffer);
     glm_vec3_sub(camera.pos, camera.buffer, camera.pos);
 }
 
@@ -97,7 +97,7 @@ void camera_moveRight(void)
 {
     glm_vec3_zero(camera.buffer);
     glm_vec3_crossn(camera.target, camera.up, camera.buffer);
-    glm_vec3_scale(camera.buffer, camera.camSpeed, camera.buffer);
+    glm_vec3_scale(camera.buffer, (camera.camSpeed * camera.deltaTime), camera.buffer);
     glm_vec3_add(camera.pos, camera.buffer, camera.pos);
 }
 
@@ -105,6 +105,6 @@ void camera_moveLeft(void)
 {
     glm_vec3_zero(camera.buffer);
     glm_vec3_crossn(camera.target, camera.up, camera.buffer);
-    glm_vec3_scale(camera.buffer, camera.camSpeed, camera.buffer);
+    glm_vec3_scale(camera.buffer, (camera.camSpeed * camera.deltaTime), camera.buffer);
     glm_vec3_sub(camera.pos, camera.buffer, camera.pos);
 }

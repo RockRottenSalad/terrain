@@ -61,6 +61,7 @@ int main(int argc, char** argv)
     // # IDENTITY MATRIX AND FIRST PERSPECTIVE/VIEW MATRIX CALC
     mat4 model;
     glm_mat4_identity(model);
+    camera.deltaTime = 0.0f;
     shader.setTransFunc(&model, camera.getView(), camera.getPerspective());
 
     glEnable(GL_DEPTH_TEST);
@@ -71,7 +72,8 @@ int main(int argc, char** argv)
     {
         window.events();
         window.deltaB = (float)glfwGetTime();
-        window.deltaTime += window.deltaB - window.deltaA;
+        window.deltaTime = window.deltaB - window.deltaA;
+        camera.deltaTime = window.deltaTime;
         /*
         err = glGetError();
         if(err != GL_NO_ERROR)
@@ -81,7 +83,7 @@ int main(int argc, char** argv)
         
         camera.updateCamera();
         shader.setTransFunc(&model, camera.getView(), camera.getPerspective());
-        if(window.deltaTime >= 1.0 / 30.0)
+        if(window.deltaTime >= 1.0 / 60.0)
         {
             for(unsigned int i = 0; i < terrain.strips; i++)
                 glDrawElements(GL_TRIANGLE_STRIP, terrain.vertsPrStrip, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * terrain.vertsPrStrip*i));
